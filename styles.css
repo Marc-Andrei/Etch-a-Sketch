@@ -1,0 +1,12 @@
+.container {
+    background-color: lightblue;
+    width:300px;
+    height: 300px;
+    display:flex;
+    flex-wrap : wrap;
+}
+
+.grid {
+    background-color: lightpink;
+    flex-grow: 1;
+}
