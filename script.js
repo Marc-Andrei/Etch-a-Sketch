@@ -17,12 +17,18 @@ function createGrid (squares) {
     }
 }
 
-const btn = document.querySelector(".btn");
-const container = document.querySelector(".container");
-let pr=16;
-createGrid(pr);
-btn.addEventListener("click", () => {
+function buttonGrid(e) {
     pr = prompt("Select number of squares(not more than 100)");
+    if (e.target.className === "btn") {
+        color = "black";
+    }
+    else if (e.target.className === "colorBtn") {
+        color = "multicolor";
+    }
+    else if (e.target.className === "blackenBtn") {
+        color = "blacken";
+        fade = 255;
+    }
     if (pr > 100) {
         alert("Number too high!");
     } else{
@@ -31,10 +37,32 @@ btn.addEventListener("click", () => {
         } 
         createGrid(pr);
     }
-})
+
+}
+
+const btn = document.querySelector(".btn");
+const container = document.querySelector(".container");
+const colorBtn = document.querySelector(".colorBtn");
+const blackenBtn = document.querySelector(".blackenBtn");
+let pr=16;
+createGrid(pr);
+btn.addEventListener("click", buttonGrid);
+colorBtn.addEventListener("click", buttonGrid);
+blackenBtn.addEventListener("click", buttonGrid);
+let fade = 255;
 
 
+let color = "black";
 
 container.addEventListener("mouseover", e => {
-    e.target.style.backgroundColor = "black";
+    if (color === "multicolor") {
+        e.target.style.backgroundColor = `rgb(${randomColor()}, ${randomColor()}, ${randomColor()})`;
+    }
+    else if (color === "black") {
+        e.target.style.backgroundColor = "black";
+    }
+    else if (color === "blacken") {
+        if (fade >-0) fade -= 255/10;
+        e.target.style.backgroundColor = `rgb(${fade}, ${fade}, ${fade})`;
+    }
 });
